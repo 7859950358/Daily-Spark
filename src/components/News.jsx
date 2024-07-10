@@ -14,7 +14,7 @@ export class News extends Component {
         }
     }
     async componentDidMount() {
-        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=f044c2f986b848c886f53e587756e0c5&pageSize=${this.props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=f044c2f986b848c886f53e587756e0c5&category=${this.props.category}&pageSize=${this.props.pageSize}`;
         this.setState({ loading: true });
         let data = await fetch(url);
         let parsedData = await data.json();
@@ -30,7 +30,7 @@ export class News extends Component {
     handlePreviousPage = async () => {
         console.log("Previous");
         console.log("Next");
-        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=f044c2f986b848c886f53e587756e0c5&pageSize=${this.props.pageSize}&page=${this.state.page - 1}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=f044c2f986b848c886f53e587756e0c5&category=${this.props.category}&pageSize=${this.props.pageSize}&page=${this.state.page - 1}`;
         this.setState({ loading: true });
         let data = await fetch(url);
         let parsedData = await data.json();
@@ -45,7 +45,7 @@ export class News extends Component {
     handleNextPage = async () => {
         console.log("Next");
         if (!(this.state.page + 1 > Math.ceil(this.state.totalResults / this.state.pageSize))) {
-            let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=f044c2f986b848c886f53e587756e0c5&pageSize=${this.props.pageSize}&page=${this.state.page + 1}`;
+            let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=f044c2f986b848c886f53e587756e0c5&category=${this.props.category}&pageSize=${this.props.pageSize}&page=${this.state.page + 1}`;
             this.setState({ loading: true })
             let data = await fetch(url);
             let parsedData = await data.json();
@@ -60,13 +60,13 @@ export class News extends Component {
 
     render() {
         return (
-            <div className='container'>
-                <h1>Today's Top Headlines</h1>
+            <div className='container news-headline'>
+                <h1 className='text-center'>Today's Top Headlines</h1>
                 {this.state.loading && <Loader />}
                 <div className="row">
                     {!this.state.loading && this.state.articles.map((element) => {
-                        return <div className="col-md-4" key={element.url}>
-                            <NewsItem title={element.title ? element.title.slice(0, 55) : ""} description={element.description ? element.description.slice(0, 88) : ""} imageUrl={element.urlToImage} newsUrl={element.url} />
+                        return <div className="col-md-4 my-3" key={element.url}>
+                            <NewsItem title={element.title ? element.title.slice(0, 55) : ""} description={element.description ? element.description.slice(0, 88) : ""} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
                         </div>
                     })}
                 </div>
