@@ -184,6 +184,7 @@
 .card {
   border: 5px double lightgreen;
   border-radius: 20px;
+  /* background: transparent; */
 }
 
 .translate-middle {
