@@ -5,16 +5,16 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 export class News extends Component {
 
-    constructor() {
-        super();
-        console.log("Hello I am a constructor from News component");
-        this.state = {
-            articles: [],
-            loading: false,
-            page: 1,
-            totalResults: 0
-        };
-    }
+        constructor() {
+            super();
+            console.log("Hello I am a constructor from News component");
+            this.state = {
+                articles: [],
+                loading: false,
+                page: 1,
+                totalResults: 0
+            };
+        }
 
     capitallizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
